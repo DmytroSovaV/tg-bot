@@ -23,7 +23,7 @@ async def start(update: Update, context):
 async def forward_message(update: Update, context):
     user = update.message.from_user
     message_text = f"✉ Нове повідомлення від @{user.username}:\n\n{update.message.text}"
-    await context.bot.send_message(chat_id=7508836014, text=message_text)
+    await context.bot.send_message(chat_id=ADMIN_CHAT_ID, text=message_text)
 
 def main():
     app = Application.builder().token(TOKEN).build()
