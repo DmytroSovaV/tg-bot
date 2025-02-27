@@ -3,7 +3,9 @@ from telegram.ext import Application, MessageHandler, filters, CommandHandler
 from dotenv import load_dotenv
 import os
 
-load_dotenv()  # Завантажує змінні з .env
+
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
 
 TOKEN = os.getenv("TOKEN")
