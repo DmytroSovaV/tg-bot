@@ -5,7 +5,6 @@ from telethon import TelegramClient, events
 from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, CommandHandler, ContextTypes
 
-# ===== ЗАВАНТАЖЕННЯ ЗМІННИХ ====
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
 ADMIN_CHAT_ID = os.getenv("CHAT_ID")
@@ -19,8 +18,6 @@ target_chats = os.getenv("TARGET_CHATS", "").split(",")
 
 keywords = os.getenv("KEYWORDS", "").split(",")
 
-# ==== ОБРОБНИКИ БОТА ====
-
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(replyText)
@@ -28,10 +25,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.message.from_user
-    msg = f"✉️ Нове повідомлення від @{user.username or 'невідомо'}:\n\n{update.message.text}"
+    msg = f"Нове повідомлення від @{user.username or 'невідомо'}:\n\n{update.message.text}"
     await context.bot.send_message(chat_id=ADMIN_CHAT_ID, text=msg)
-
-# ==== ОБРОБНИК ПОВІДОМЛЕНЬ З ГРУП ====
 
 
 @client.on(events.NewMessage(chats=target_chats))
@@ -41,32 +36,44 @@ async def handler(event):
         sender = await event.get_sender()
         sender_name = f"{sender.first_name or ''} {sender.last_name or ''}".strip()
         username = f"@{sender.username}" if sender.username else "Без юзернейма"
-        text = f"🔔 Нове повідомлення в {event.chat.title or 'групі'} від {sender_name} ({username}):\n\n{msg}"
-
+        text = f"Нове повідомлення в {event.chat.title or 'групі'} від {sender_name} ({username}):\n\n{msg}"
         await app.bot.send_message(chat_id=ADMIN_CHAT_ID, text=text)
-
-# ==== ЗАПУСК ====
-
-
-async def telethon_monitor():
-    await client.run_until_disconnected()
 
 
 async def main():
     global app
+    print("Ініціалізація бота...")
     app = Application.builder().token(TOKEN).build()
+
     app.add_handler(CommandHandler("start", start))
     app.add_handler(MessageHandler(
         filters.TEXT & ~filters.COMMAND, forward_message))
 
     await app.initialize()
+    print("App ініціалізовано")
+
     await app.start()
-    await app.updater.start_polling()
+    print("App запущено")
+
+    # Запускаємо polling без блокування
+    polling_task = asyncio.create_task(app.updater.start_polling())
+    print("Polling стартував")
 
     await client.start()
-    print("✅ Моніторинг і бот запущені…")
+    print("Telethon клієнт стартував")
 
-    await telethon_monitor()
+    print("Моніторинг і бот запущені…")
+
+    # Чекаємо поки polling і Telethon не завершаться
+    await asyncio.gather(
+        client.run_until_disconnected(),
+        polling_task,
+    )
+
+    # Після завершення polling потрібно викликати stop
+    await app.updater.stop()
+    await app.stop()
+    await app.shutdown()
 
 if __name__ == "__main__":
     asyncio.run(main())

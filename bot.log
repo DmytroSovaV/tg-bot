@@ -1,0 +1,37 @@
+2025-06-22 23:44:43,546 | INFO | Ініціалізація бота...
+2025-06-22 23:44:44,405 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getMe "HTTP/1.1 200 OK"
+2025-06-22 23:44:44,406 | INFO | App ініціалізовано
+2025-06-22 23:44:44,406 | INFO | Application started
+2025-06-22 23:44:44,406 | INFO | App запущено
+2025-06-22 23:44:44,406 | INFO | Polling стартував
+2025-06-22 23:44:44,406 | INFO | Connecting to 149.154.167.51:443/TcpFull...
+2025-06-22 23:44:44,443 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/deleteWebhook "HTTP/1.1 200 OK"
+2025-06-22 23:44:44,443 | INFO | Connection to 149.154.167.51:443/TcpFull complete!
+2025-06-22 23:44:44,573 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:44:44,656 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/sendMessage "HTTP/1.1 200 OK"
+2025-06-22 23:44:44,656 | INFO | Переслав повідомлення від 7493384474 адміну
+2025-06-22 23:44:44,723 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/sendMessage "HTTP/1.1 200 OK"
+2025-06-22 23:44:44,724 | INFO | Переслав повідомлення від 7493384474 адміну
+2025-06-22 23:44:44,793 | INFO | Telethon клієнт стартував
+2025-06-22 23:44:44,794 | INFO | Моніторинг і бот запущені…
+2025-06-22 23:44:54,639 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:04,681 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:14,723 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:24,766 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:34,807 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:44,846 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getUpdates "HTTP/1.1 200 OK"
+2025-06-22 23:45:45,229 | INFO | Disconnecting from 149.154.167.51:443/TcpFull...
+2025-06-22 23:45:45,231 | INFO | Disconnection from 149.154.167.51:443/TcpFull complete!
+2025-06-22 23:45:47,252 | INFO | Ініціалізація бота...
+2025-06-22 23:45:48,147 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/getMe "HTTP/1.1 200 OK"
+2025-06-22 23:45:48,148 | INFO | App ініціалізовано
+2025-06-22 23:45:48,148 | INFO | Application started
+2025-06-22 23:45:48,148 | INFO | App запущено
+2025-06-22 23:45:48,149 | INFO | Polling стартував
+2025-06-22 23:45:48,149 | INFO | Connecting to 149.154.167.51:443/TcpFull...
+2025-06-22 23:45:48,186 | INFO | Connection to 149.154.167.51:443/TcpFull complete!
+2025-06-22 23:45:48,234 | INFO | HTTP Request: POST https://api.telegram.org/bot8036968956:AAGa8xUen7369urnfObZZkbXxiJhKuu1S1g/deleteWebhook "HTTP/1.1 200 OK"
+2025-06-22 23:45:48,500 | INFO | Telethon клієнт стартував
+2025-06-22 23:45:48,501 | INFO | Моніторинг і бот запущені…
+2025-06-22 23:45:52,272 | INFO | Disconnecting from 149.154.167.51:443/TcpFull...
+2025-06-22 23:45:52,274 | INFO | Disconnection from 149.154.167.51:443/TcpFull complete!
