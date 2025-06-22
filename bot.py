@@ -15,31 +15,9 @@ api_hash = os.getenv("API_HASH")
 
 client = TelegramClient('session_name', api_id, api_hash)
 
-target_chats = [
-    'https://t.me/ukrpolska',
-    'https://t.me/robota_vpl',
-    'https://t.me/ukrainerfrankfurtammain',
-    'https://t.me/Poputchiki_ukraine_chat',
-    'https://t.me/ukrainebuss',
-    'https://t.me/doshkaogoloshenpp',
-    'https://t.me/poland_transport_work',
-    'https://t.me/moiawayuaitchat',
-    'https://t.me/PoputkaUA_Ukraine',
-    'https://t.me/ukrainerfreiburg',
-    'https://t.me/poputka_ukraine',
-    'https://t.me/pereviznikyCHUA',
-    'https://t.me/robota_perevozka_it',
-    'https://t.me/ogoloshennyaua'
-]
+target_chats = os.getenv("TARGET_CHATS", "").split(",")
 
-keywords = [
-    "автобус", "рейс", "рейси", "поїздка", "шукаю", "потрібно", "перевізник", "їде хтось",
-    "є місця", "вільне місце", "є вільне", "є місце", "бус", "виїзд", "відправлення",
-    "бронювання", "перевезення", "пасажири", "хто їде", "потрібен транспорт", "є бус",
-    "польща", "чехія", "німеччина", "германія", "італія", "італію", "австрія", "угорщина",
-    "румунія", "литва", "латвія", "естонія", "словакия", "франція", "бельгія", "нідерланди",
-    "іспанія", "португалія", "хорватія", "словенія", "греція"
-]
+keywords = os.getenv("KEYWORDS", "").split(",")
 
 # ==== ОБРОБНИКИ БОТА ====
 
