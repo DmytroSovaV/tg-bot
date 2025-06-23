@@ -15,8 +15,11 @@ api_hash = os.getenv("API_HASH")
 client = TelegramClient('session_name', api_id, api_hash)
 
 target_chats = os.getenv("TARGET_CHATS", "").split(",")
-
 keywords = os.getenv("KEYWORDS", "").split(",")
+
+# Кеш для унікальних повідомлень
+recent_messages = set()
+MAX_CACHE_SIZE = 100
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -31,9 +34,21 @@ async def forward_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 @client.on(events.NewMessage(chats=target_chats))
 async def handler(event):
-    msg = event.message.message.lower()
+    msg = event.message.message.strip().lower()
+
+    sender = await event.get_sender()
+    sender_id = sender.id
+    unique_key = f"{sender_id}:{msg}"
+
+    if unique_key in recent_messages:
+        return  # Дублікат — не пересилати
+
+    # Додаємо до кешу
+    recent_messages.add(unique_key)
+    if len(recent_messages) > MAX_CACHE_SIZE:
+        recent_messages.pop()
+
     if any(word in msg for word in keywords):
-        sender = await event.get_sender()
         sender_name = f"{sender.first_name or ''} {sender.last_name or ''}".strip()
         username = f"@{sender.username}" if sender.username else "Без юзернейма"
         text = f"Нове повідомлення в {event.chat.title or 'групі'} від {sender_name} ({username}):\n\n{msg}"
@@ -55,7 +70,6 @@ async def main():
     await app.start()
     print("App запущено")
 
-    # Запускаємо polling без блокування
     polling_task = asyncio.create_task(app.updater.start_polling())
     print("Polling стартував")
 
@@ -64,13 +78,11 @@ async def main():
 
     print("Моніторинг і бот запущені…")
 
-    # Чекаємо поки polling і Telethon не завершаться
     await asyncio.gather(
         client.run_until_disconnected(),
         polling_task,
     )
 
-    # Після завершення polling потрібно викликати stop
     await app.updater.stop()
     await app.stop()
     await app.shutdown()
