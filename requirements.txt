@@ -1,6 +1,6 @@
-python-telegram-bot==20.6
+python-telegram-bot==20.7
 telethon==1.34.0
-python-dotenv==1.0.1
+python-dotenv
 aiofiles==24.1.0
 aiogram==3.18.0
 aiohttp==3.11.13
