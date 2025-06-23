@@ -6,8 +6,9 @@ from telegram import Update
 from telegram.ext import Application, MessageHandler, filters, CommandHandler, ContextTypes
 
 load_dotenv()
+
 TOKEN = os.getenv("TOKEN")
-ADMIN_CHAT_ID = os.getenv("CHAT_ID")
+ADMIN_CHAT_ID = int(os.getenv("CHAT_ID"))
 replyText = os.getenv("replyText")
 api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
@@ -43,7 +44,6 @@ async def handler(event):
     if unique_key in recent_messages:
         return  # Дублікат — не пересилати
 
-    # Додаємо до кешу
     recent_messages.add(unique_key)
     if len(recent_messages) > MAX_CACHE_SIZE:
         recent_messages.pop()
@@ -64,28 +64,17 @@ async def main():
     app.add_handler(MessageHandler(
         filters.TEXT & ~filters.COMMAND, forward_message))
 
-    await app.initialize()
-    print("App ініціалізовано")
-
-    await app.start()
-    print("App запущено")
-
-    polling_task = asyncio.create_task(app.updater.start_polling())
-    print("Polling стартував")
-
+    print("Запуск Telethon клієнта...")
     await client.start()
     print("Telethon клієнт стартував")
 
-    print("Моніторинг і бот запущені…")
-
+    print("Запуск Telegram бота...")
+    # Одночасно запускаємо Telethon і Telegram бот
     await asyncio.gather(
         client.run_until_disconnected(),
-        polling_task,
+        app.run_polling(),
     )
 
-    await app.updater.stop()
-    await app.stop()
-    await app.shutdown()
 
 if __name__ == "__main__":
     asyncio.run(main())
